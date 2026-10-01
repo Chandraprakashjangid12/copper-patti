@@ -20,7 +20,7 @@ export default function Home() {
   return (
     <main>
       {/* Hero */}
-      <section className="relative overflow-hidden bg-ink text-paper"
+      <section id="home" className="relative overflow-hidden bg-ink text-paper"
         style={{ backgroundImage: "radial-gradient(60% 80% at 88% 12%, rgba(184,115,51,.30), transparent 60%), repeating-linear-gradient(180deg, rgba(255,255,255,.025) 0 1px, transparent 1px 28px)" }}>
         <div className="mx-auto grid max-w-6xl items-center gap-14 px-5 py-16 md:grid-cols-[1.1fr_1fr] md:py-28">
           <div>
@@ -83,7 +83,7 @@ export default function Home() {
       </section>
 
       {/* About */}
-      <section className="bg-paper">
+      <section id="about" className="scroll-mt-24 bg-paper">
         <div className="mx-auto grid max-w-6xl items-center gap-12 px-5 py-20 md:grid-cols-2">
           <div>
             <h2 className={h2}>Engineering copper solutions you can rely on</h2>
@@ -96,13 +96,13 @@ export default function Home() {
           <div className="grid aspect-[4/3] place-items-center overflow-hidden rounded-xl border border-copper/30 bg-sand">
             {about.image
               ? <img src={about.image} alt="Balaji Enterprises" className="h-full w-full object-cover" />
-              : <img src="/logo.png" alt="Balaji Enterprises" className="h-70 object-contain" />}
+              : <img src="/logo.png" alt="Balaji Enterprises" className="h-4/5 object-contain" />}
           </div>
         </div>
       </section>
 
       {/* Products */}
-      <section className="bg-sand">
+      <section id="products" className="scroll-mt-24 bg-sand">
         <div className="mx-auto max-w-6xl px-5 py-20">
           <h2 className={h2}>Our products</h2>
           <p className="mt-2 max-w-xl text-ink/70">Copper strip in the insulation and size your winding needs.</p>
@@ -113,7 +113,7 @@ export default function Home() {
       </section>
 
       {/* Why us */}
-      <section className="bg-ink text-paper">
+      <section id="why" className="scroll-mt-24 bg-ink text-paper">
         <div className="mx-auto max-w-6xl px-5 py-20">
           <h2 className={h2}>Why industries choose Balaji Enterprises</h2>
           <div className="mt-10 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">

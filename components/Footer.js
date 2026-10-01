@@ -7,13 +7,13 @@ export default function Footer() {
   return (
     <>
       <footer className="bg-ink text-sand">
-        <div className="bg-copper text-ink">
-          <div className="mx-auto flex max-w-6xl flex-col items-start justify-between gap-5 px-5 py-10 md:flex-row md:items-center">
+        <div className="text-ink" style={{ background: "linear-gradient(120deg,#D99A5B,#B87333)" }}>
+          <div className="mx-auto flex max-w-6xl flex-col items-start justify-between gap-6 px-5 py-14 md:flex-row md:items-center">
             <div>
-              <h2 className={`${head.className} text-2xl font-semibold md:text-3xl`}>Need copper strip for your next winding?</h2>
-              <p className="mt-1 text-ink/80">Send your size and quantity. We reply with a quote the same day.</p>
+              <h2 className={`${head.className} text-3xl font-semibold md:text-4xl`}>Need Copper Strip for Your Next Transformer?</h2>
+              <p className="mt-2 max-w-xl text-lg text-ink/80">Tell us your required size, grade and quantity. Our team will get back to you with a quotation.</p>
             </div>
-            <Link href="/contact" className={`${btn} bg-ink text-paper hover:bg-charcoal`}>Request a quote</Link>
+            <Link href="/contact" className={`${btn} bg-ink px-8 py-4 text-paper hover:bg-charcoal`}>Request a Quote</Link>
           </div>
         </div>
         <div className="mx-auto grid max-w-6xl gap-10 px-5 py-14 sm:grid-cols-2 lg:grid-cols-4">
@@ -26,7 +26,7 @@ export default function Footer() {
           <div>
             <h3 className={`${head.className} font-semibold text-paper`}>Quick links</h3>
             <ul className="mt-4 space-y-2 text-sm">
-              {nav.map((n) => <li key={n.href}><Link href={n.href} className="hover:text-copper-light">{n.label}</Link></li>)}
+              {[...nav, { label: "Industries", href: "/#industries" }].map((n) => <li key={n.href}><Link href={n.href} className="hover:text-copper-light">{n.label}</Link></li>)}
             </ul>
           </div>
           <div>
