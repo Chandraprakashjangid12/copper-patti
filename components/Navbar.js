@@ -32,10 +32,19 @@ export default function Navbar() {
             ))}
             <Link href="/contact" className={`${btn} bg-copper text-ink hover:bg-copper-light`}>Get a quote</Link>
           </nav>
-          <button className="rounded-md border border-copper/60 px-4 py-2 text-sm text-paper md:hidden"
-            aria-expanded={open} aria-controls="mobile-nav" onClick={() => setOpen(!open)}>
-            {open ? "Close" : "Menu"}
-          </button>
+         <button
+  className="grid h-11 w-11 place-items-center rounded-md border border-copper/50 transition-colors hover:border-copper-light md:hidden"
+  aria-label={open ? "Close menu" : "Open menu"}
+  aria-expanded={open}
+  aria-controls="mobile-nav"
+  onClick={() => setOpen(!open)}
+>
+  <span className="relative block h-4 w-6" aria-hidden="true">
+    <span className={`absolute left-0 h-0.5 w-6 rounded bg-copper-light transition-all duration-300 ${open ? "top-[7px] rotate-45" : "top-0"}`} />
+    <span className={`absolute left-0 top-[7px] h-0.5 w-6 rounded bg-copper-light transition-all duration-300 ${open ? "opacity-0" : ""}`} />
+    <span className={`absolute left-0 h-0.5 w-6 rounded bg-copper-light transition-all duration-300 ${open ? "top-[7px] -rotate-45" : "top-[14px]"}`} />
+  </span>
+</button>
         </div>
         {open && (
           <nav id="mobile-nav" className="border-t border-copper/30 px-5 pb-5 md:hidden" aria-label="Mobile">
