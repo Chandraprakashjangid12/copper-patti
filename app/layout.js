@@ -1,19 +1,19 @@
 import "./globals.css";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
-import { body } from "../lib/fonts";
+import { display, body } from "@/lib/fonts";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 export const metadata = {
-  title: { default: "Balaji Enterprises | Copper Winding Strips, Jaipur", template: "%s | Balaji Enterprises" },
-  description: "Copper winding strips for transformers and motors: bare, paper covered, cotton covered and enamelled. Supplied from Jaipur.",
+  title: "Balaji Enterprises | Precision Copper Patti, Strip & Busbar - Jaipur",
+  description: "High-conductivity copper patti, strips and busbars for transformer, electrical and power industries. Jaipur, Rajasthan.",
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body className={body.className}>
+    <html lang="en" className={`${display.variable} ${body.variable}`}>
+      <body className="bg-[#0A0A0A] font-body text-[#F5F2ED] antialiased">
         <Navbar />
-        {children}
+        <main>{children}</main>
         <Footer />
       </body>
     </html>

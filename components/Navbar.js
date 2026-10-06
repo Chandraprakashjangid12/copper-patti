@@ -1,83 +1,49 @@
 "use client";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { useState } from "react";
-import Logo from "./Logo";
-import { site, products, btn } from "../lib/siteData";
-
-const links = [
-  { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
-  { label: "Products", href: "/products", menu: true },
-  { label: "Industries", href: "/#industries" },
-  { label: "Contact", href: "/contact" },
-];
+import Link from "next/link";
+import { site, nav, waLink } from "@/lib/site";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
-  const path = usePathname();
-  const active = (h) => (h === "/" ? path === "/" : !h.includes("#") && path.startsWith(h));
-  const cls = (h) => `border-b-2 py-1 text-sm font-medium transition-colors hover:text-copper-light ${active(h) ? "border-copper text-copper-light" : "border-transparent text-paper"}`;
   return (
-    <header className="sticky top-0 z-50">
-      <div className="hidden bg-charcoal text-sm text-sand md:block">
-        <div className="mx-auto flex max-w-6xl justify-between px-5 py-2">
-          <span>{site.address}</span>
-          <span className="flex gap-6">
-            <a href={site.phoneHref} className="hover:text-copper-light">{site.phone}</a>
-            <a href={`mailto:${site.email}`} className="hover:text-copper-light">{site.email}</a>
-          </span>
-        </div>
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-[#2B2B2B] bg-[#0A0A0A]/75 backdrop-blur-md">
+      <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6">
+        <Link href="/" className="leading-none">
+          <span className="block font-display text-2xl font-semibold tracking-[0.12em] text-[#F5F2ED]">{site.name}</span>
+          <span className="mt-1 hidden text-[10px] tracking-[0.25em] text-[#B87333] sm:block">{site.navTagline}</span>
+        </Link>
+
+        <nav className="hidden items-center gap-9 lg:flex">
+          {nav.map((n) => (
+            <Link key={n.label} href={n.href} className="text-sm text-[#A7A7A7] transition hover:text-[#D49A5B]">
+              {n.label}
+            </Link>
+          ))}
+        </nav>
+
+        <a href={waLink()} target="_blank" rel="noreferrer"
+           className="hidden rounded-sm border border-[#B87333] px-5 py-2.5 text-sm text-[#D49A5B] transition hover:bg-[#B87333] hover:text-[#0A0A0A] lg:block">
+          Request a Quote →
+        </a>
+
+        <button aria-label="Menu" aria-expanded={open} onClick={() => setOpen(!open)} className="text-[#F5F2ED] lg:hidden">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+            {open ? <path d="M5 5l14 14M19 5L5 19" /> : <path d="M4 7h16M4 12h16M4 17h16" />}
+          </svg>
+        </button>
       </div>
-      <div className="border-b border-copper/40 bg-ink">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-3">
-          <Link href="/" aria-label="Balaji Enterprises home"><Logo /></Link>
-          <nav className="hidden items-center gap-8 md:flex" aria-label="Main">
-            {links.map((n) =>
-              n.menu ? (
-                <div key={n.href} className="group relative">
-                  <Link href={n.href} aria-current={active(n.href) ? "page" : undefined} className={cls(n.href)}>{n.label} <span aria-hidden="true" className="text-xs">▾</span></Link>
-                  <div className="invisible absolute left-0 top-full z-10 pt-3 opacity-0 transition-all group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100">
-                    <ul className="w-72 rounded-lg border border-copper/40 bg-charcoal p-2 shadow-2xl">
-                      {products.map((p) => (
-                        <li key={p.slug}><Link href={`/products/${p.slug}`} className="block rounded-md px-4 py-2 text-sm text-paper hover:bg-ink hover:text-copper-light">{p.name}</Link></li>
-                      ))}
-                      <li className="mt-1 border-t border-paper/10 pt-1"><Link href="/products" className="block rounded-md px-4 py-2 text-sm font-semibold text-copper-light hover:bg-ink">All products</Link></li>
-                    </ul>
-                  </div>
-                </div>
-              ) : (
-                <Link key={n.href} href={n.href} aria-current={active(n.href) ? "page" : undefined} className={cls(n.href)}>{n.label}</Link>
-              )
-            )}
-            <Link href="/contact" className={`${btn} bg-copper text-ink hover:bg-copper-light`}>Get a quote</Link>
-          </nav>
-          <button
-            className="grid h-11 w-11 place-items-center rounded-md border border-copper/50 transition-colors hover:border-copper-light md:hidden"
-            aria-label={open ? "Close menu" : "Open menu"} aria-expanded={open} aria-controls="mobile-nav"
-            onClick={() => setOpen(!open)}
-          >
-            <span className="relative block h-4 w-6" aria-hidden="true">
-              <span className={`absolute left-0 h-0.5 w-6 rounded bg-copper-light transition-all duration-300 ${open ? "top-[7px] rotate-45" : "top-0"}`} />
-              <span className={`absolute left-0 top-[7px] h-0.5 w-6 rounded bg-copper-light transition-all duration-300 ${open ? "opacity-0" : ""}`} />
-              <span className={`absolute left-0 h-0.5 w-6 rounded bg-copper-light transition-all duration-300 ${open ? "top-[7px] -rotate-45" : "top-[14px]"}`} />
-            </span>
-          </button>
+
+      {open && (
+        <div className="border-t border-[#2B2B2B] bg-[#0A0A0A] px-6 py-6 lg:hidden">
+          {nav.map((n) => (
+            <Link key={n.label} href={n.href} onClick={() => setOpen(false)}
+                  className="block border-b border-[#1C1C1C] py-3 text-[#F5F2ED]">{n.label}</Link>
+          ))}
+          <a href={waLink()} className="mt-5 block rounded-sm bg-[#B87333] py-3 text-center font-medium text-[#0A0A0A]">
+            Request a Quote →
+          </a>
         </div>
-        {open && (
-          <nav id="mobile-nav" className="max-h-[75vh] overflow-y-auto border-t border-copper/30 px-5 pb-5 md:hidden" aria-label="Mobile">
-            {links.map((n) => (
-              <div key={n.href}>
-                <Link href={n.href} onClick={() => setOpen(false)} className="block border-b border-paper/10 py-3 text-paper">{n.label}</Link>
-                {n.menu && products.map((p) => (
-                  <Link key={p.slug} href={`/products/${p.slug}`} onClick={() => setOpen(false)} className="block border-b border-paper/5 py-2 pl-5 text-sm text-sand/80">{p.name}</Link>
-                ))}
-              </div>
-            ))}
-            <Link href="/contact" onClick={() => setOpen(false)} className={`${btn} mt-4 block bg-copper text-center text-ink`}>Get a quote</Link>
-          </nav>
-        )}
-      </div>
+      )}
     </header>
   );
 }
