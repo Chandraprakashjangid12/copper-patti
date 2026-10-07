@@ -2,8 +2,8 @@ import Link from "next/link";
 import { site } from "@/lib/site";
 
 const cols = [
-  { h: "Company", l: [["About", "/#about"], ["Quality", "/#quality"], ["Manufacturing", "/#quality"]] },
-  { h: "Products", l: [["Copper Patti", "/#products"], ["Copper Strip", "/#products"], ["Copper Busbar", "/#products"]] },
+  { h: "Company", l: [["About", "/about"], ["Quality", "/quality"], ["Manufacturing", "/quality"]] },
+  { h: "Products", l: [["Copper Patti", "/products"], ["Copper Strip", "/products"], ["Copper Busbar", "/products"]] },
   { h: "Industries", l: [["Electrical", "/#industries"], ["Transformers", "/#industries"], ["Power", "/#industries"], ["Engineering", "/#industries"]] },
 ];
 

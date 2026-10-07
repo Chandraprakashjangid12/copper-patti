@@ -1,70 +1,48 @@
 "use client";
 import { useState } from "react";
-import { site, products, whatsapp, btn } from "../lib/siteData";
+import { products, waLink } from "@/lib/site";
 
-const field = "w-full rounded-md border border-ink/20 bg-white px-4 py-3 text-sm outline-none focus:border-copper";
+const field = "w-full rounded-sm border border-[#2B2B2B] bg-[#0A0A0A] px-4 py-3.5 text-sm text-[#F5F2ED] outline-none transition placeholder:text-[#A7A7A7]/50 focus:border-[#B87333] focus:shadow-[0_0_0_3px_rgba(184,115,51,0.15)]";
+const label = "mb-2 block text-xs tracking-[0.2em] text-[#A7A7A7]";
 
-export default function ContactForm({ product = "" }) {
-  const [status, setStatus] = useState("idle");
+export default function ContactForm() {
+  const [f, setF] = useState({ name: "", phone: "", product: products[0].name, msg: "" });
+  const set = (k) => (e) => setF({ ...f, [k]: e.target.value });
 
-  async function onSubmit(e) {
+  function send(e) {
     e.preventDefault();
-    const d = Object.fromEntries(new FormData(e.currentTarget));
-    const msg = `Hello Balaji Enterprises,\nName: ${d.name}\nPhone: ${d.phone}\nEmail: ${d.email || "-"}\nProduct: ${d.product}\nSize / quantity: ${d.size || "-"}\nMessage: ${d.message || "-"}`;
-    if (!site.formKey) {
-      window.open(whatsapp(msg), "_blank");
-      setStatus("sent");
-      return;
-    }
-    setStatus("sending");
-    try {
-      const r = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({ access_key: site.formKey, subject: `Quote request: ${d.product}`, ...d }),
-      });
-      const j = await r.json();
-      setStatus(j.success ? "sent" : "error");
-    } catch {
-      setStatus("error");
-    }
+    const text = `Hello, I am ${f.name}.\nPhone: ${f.phone}\nProduct: ${f.product}\nRequirement: ${f.msg}`;
+    window.open(waLink(text), "_blank");
   }
 
-  if (status === "sent")
-    return (
-      <div className="rounded-lg border border-copper/40 bg-sand p-8" role="status">
-        <h3 className="text-xl font-semibold">Request sent</h3>
-        <p className="mt-2 text-ink/80">Thank you. We will call you shortly on the number you gave.</p>
-        <button onClick={() => setStatus("idle")} className="mt-4 text-sm font-semibold text-copper hover:underline">Send another request</button>
-      </div>
-    );
-
   return (
-    <form onSubmit={onSubmit} className="grid gap-4 rounded-lg border border-ink/10 bg-white p-6 shadow-sm sm:grid-cols-2">
-      <label className="text-sm font-medium">Name
-        <input name="name" required autoComplete="name" className={`${field} mt-1`} />
-      </label>
-      <label className="text-sm font-medium">Phone
-        <input name="phone" type="tel" required autoComplete="tel" pattern="[0-9+ ]{10,15}" title="Enter a valid phone number" className={`${field} mt-1`} />
-      </label>
-      <label className="text-sm font-medium">Email (optional)
-        <input name="email" type="email" autoComplete="email" className={`${field} mt-1`} />
-      </label>
-      <label className="text-sm font-medium">Product
-        <select name="product" defaultValue={product} className={`${field} mt-1`}>
-          {products.map((p) => <option key={p.slug}>{p.name}</option>)}
-          <option>Other</option>
+    <form onSubmit={send} className="space-y-6 rounded-md border border-[#2B2B2B] bg-[#141414] p-8 sm:p-10">
+      <div>
+        <h2 className="font-display text-4xl font-semibold text-[#F5F2ED]">Request a Quote</h2>
+        <p className="mt-2 text-sm text-[#A7A7A7]">Fill your requirement. It opens WhatsApp with the details ready.</p>
+      </div>
+      <div className="grid gap-6 sm:grid-cols-2">
+        <div>
+          <label className={label} htmlFor="n">NAME</label>
+          <input id="n" required className={field} placeholder="Your name" value={f.name} onChange={set("name")} />
+        </div>
+        <div>
+          <label className={label} htmlFor="p">PHONE</label>
+          <input id="p" required inputMode="tel" className={field} placeholder="+91" value={f.phone} onChange={set("phone")} />
+        </div>
+      </div>
+      <div>
+        <label className={label} htmlFor="pr">PRODUCT</label>
+        <select id="pr" className={field} value={f.product} onChange={set("product")}>
+          {products.map((p) => <option key={p.name}>{p.name}</option>)}
         </select>
-      </label>
-      <label className="text-sm font-medium sm:col-span-2">Size and quantity
-        <input name="size" placeholder="e.g. 12 × 2 mm, 500 kg" className={`${field} mt-1`} />
-      </label>
-      <label className="text-sm font-medium sm:col-span-2">Message
-        <textarea name="message" rows={4} className={`${field} mt-1`} />
-      </label>
-      {status === "error" && <p className="text-sm text-red-700 sm:col-span-2" role="alert">Could not send. Please try again or message us on WhatsApp.</p>}
-      <button disabled={status === "sending"} className={`${btn} bg-copper text-ink hover:bg-copper-light disabled:opacity-60 sm:col-span-2`}>
-        {status === "sending" ? "Sending..." : "Send request"}
+      </div>
+      <div>
+        <label className={label} htmlFor="m">REQUIREMENT</label>
+        <textarea id="m" rows={4} className={field} placeholder="Size, thickness, quantity..." value={f.msg} onChange={set("msg")} />
+      </div>
+      <button className="w-full rounded-sm bg-[#B87333] py-4 font-medium text-[#0A0A0A] transition hover:bg-[#D49A5B] hover:shadow-[0_0_40px_rgba(184,115,51,0.35)]">
+        Send on WhatsApp →
       </button>
     </form>
   );

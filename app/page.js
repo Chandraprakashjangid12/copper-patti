@@ -2,8 +2,8 @@ import Hero from "@/components/Hero";
 import About from "@/components/About";
 import Products from "@/components/Products";
 import Industries from "@/components/Industries";
-import { Process,  } from "@/components/Process";
-import { Factory,  } from "@/components/Factorycta";
+import { Process, Quality } from "@/components/Process";
+import { Factory, FinalCta } from "@/components/FactoryCta";
 
 export default function Home() {
   return (
@@ -13,8 +13,9 @@ export default function Home() {
       <Products />
       <Industries />
       <Process />
-      {/* <Quality /> */}
-      {/* <FinalCta /> */}
+      <Quality />
+      <Factory />
+      <FinalCta />
     </>
   );
 }
