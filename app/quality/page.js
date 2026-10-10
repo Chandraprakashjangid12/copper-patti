@@ -1,17 +1,11 @@
 import PageHero from "@/components/PageHero";
 import { FinalCta } from "@/components/FactoryCta";
-import { quality, stats } from "@/lib/site";
+import { quality, stats, processSteps } from "@/lib/site";
 
-export const metadata = { title: "Quality | Balaji Enterprises" };
-
-const steps = [
-  ["Raw Material", "Copper is checked for purity and condition before it enters production."],
-  ["Rolling", "Controlled rolling brings the strip to the required thickness and width."],
-  ["Annealing", "Heat treatment softens the copper for easy winding and bending."],
-  ["Cutting", "Precise slitting and cutting to the size your application needs."],
-  ["Quality Inspection", "Thickness, width and surface are measured and checked."],
-  ["Final Dispatch", "Careful packing so material reaches you clean and undamaged."],
-];
+export const metadata = {
+  title: "Quality | Balaji Enterprises",
+  description: "How Balaji Enterprises checks copper patti, strips and busbars at every stage before dispatch.",
+};
 
 const checks = [
   ["Thickness & width", "Measured against the ordered size."],
@@ -26,25 +20,27 @@ export default function QualityPage() {
       <PageHero title="Quality That Performs" text="Every stage of production is watched, so what leaves our unit is what you ordered." />
 
       {/* Pillars */}
-      <section className="bg-[#0A0A0A] py-28">
-        <div className="mx-auto grid max-w-7xl gap-px overflow-hidden rounded-md border border-[#2B2B2B] bg-[#2B2B2B] px-0 sm:grid-cols-2 lg:grid-cols-4">
+      <section className="bg-[#0A0A0A] py-16 md:py-24">
+        <div className="mx-auto max-w-7xl px-6">
+        <div className="grid gap-px overflow-hidden rounded-md border border-[#2B2B2B] bg-[#2B2B2B] sm:grid-cols-2 lg:grid-cols-4">
           {quality.map((q, i) => (
-            <div key={q.t} className="group bg-[#0A0A0A] p-10 transition hover:bg-[#141414] hover:shadow-[inset_0_0_70px_rgba(184,115,51,0.12)]">
-              <span className="font-display text-6xl font-semibold text-[#B87333]/40 transition group-hover:text-[#D49A5B]">{String(i + 1).padStart(2, "0")}</span>
+            <div key={q.t} className="group bg-[#0A0A0A] p-8 transition hover:bg-[#141414] hover:shadow-[inset_0_0_70px_rgba(184,115,51,0.12)]">
+              <span className="font-display text-6xl font-semibold text-[#B87333] transition group-hover:text-[#D49A5B]">{String(i + 1).padStart(2, "0")}</span>
               <h3 className="mt-6 font-display text-3xl font-semibold text-[#F5F2ED]">{q.t}</h3>
               <p className="mt-3 text-sm leading-relaxed text-[#A7A7A7]">{q.d}</p>
             </div>
           ))}
         </div>
+        </div>
       </section>
 
       {/* Process timeline */}
-      <section className="bg-[#141414] py-28">
+      <section className="bg-[#141414] py-16 md:py-24">
         <div className="mx-auto max-w-5xl px-6">
           <p className="text-xs tracking-[0.3em] text-[#B87333]">MANUFACTURING</p>
           <h2 className="mt-4 font-display text-5xl font-semibold text-[#F5F2ED] sm:text-6xl">From Copper to Precision</h2>
-          <ol className="relative mt-16 border-l border-[#B87333]/40">
-            {steps.map(([t, d], i) => (
+          <ol className="relative mt-12 border-l border-[#B87333]/40">
+            {processSteps.map(({ t, d }, i) => (
               <li key={t} className="relative pb-12 pl-10 last:pb-0">
                 <span className="absolute -left-[7px] top-2 h-3.5 w-3.5 rounded-full border border-[#D49A5B] bg-[#141414]" />
                 <span className="font-display text-xl font-semibold text-[#B87333]">{String(i + 1).padStart(2, "0")}</span>
@@ -57,7 +53,7 @@ export default function QualityPage() {
       </section>
 
       {/* Inspection checklist + stats */}
-      <section className="bg-[#0A0A0A] py-28">
+      <section className="bg-[#0A0A0A] py-16 md:py-24">
         <div className="mx-auto grid max-w-7xl gap-16 px-6 lg:grid-cols-2">
           <div>
             <p className="text-xs tracking-[0.3em] text-[#B87333]">INSPECTION</p>

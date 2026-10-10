@@ -9,16 +9,16 @@ const icons = {
 
 export default function Industries() {
   return (
-    <section id="industries" className="bg-[#141414] py-28">
+    <section id="industries" className="bg-[#141414] py-16 md:py-24">
       <div className="mx-auto max-w-7xl px-6">
         <h2 className="font-display text-5xl font-semibold text-[#F5F2ED] sm:text-6xl">Powering Critical Industries</h2>
-        <div className="mt-14 grid gap-px overflow-hidden rounded-md border border-[#2B2B2B] bg-[#2B2B2B] sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-12 grid gap-px overflow-hidden rounded-md border border-[#2B2B2B] bg-[#2B2B2B] sm:grid-cols-2 lg:grid-cols-4">
           {industries.map((i) => (
-            <div key={i.name} className="group bg-[#141414] p-9 transition hover:bg-[#1C1C1C] hover:shadow-[inset_0_0_60px_rgba(184,115,51,0.12)]">
-              <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#B87333" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" className="transition group-hover:stroke-[#D49A5B]">
+            <div key={i.name} className="group bg-[#141414] p-8 transition hover:bg-[#1C1C1C] hover:shadow-[inset_0_0_60px_rgba(184,115,51,0.12)]">
+              <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#B87333" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" className="transition group-hover:stroke-[#D49A5B]" aria-hidden="true">
                 {icons[i.icon]}
               </svg>
-              <h3 className="mt-8 font-display text-3xl font-semibold text-[#F5F2ED]">{i.name}</h3>
+              <h3 className="mt-6 font-display text-3xl font-semibold text-[#F5F2ED]">{i.name}</h3>
               <p className="mt-3 text-sm leading-relaxed text-[#A7A7A7]">{i.text}</p>
             </div>
           ))}

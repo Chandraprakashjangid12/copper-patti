@@ -1,8 +1,11 @@
 import PageHero from "@/components/PageHero";
 import ContactForm from "@/components/ContactForm";
-import { site, waLink } from "@/lib/site";
+import { site, waLink, mapsDirections } from "@/lib/site";
 
-export const metadata = { title: "Contact | Balaji Enterprises" };
+export const metadata = {
+  title: "Contact | Balaji Enterprises",
+  description: "Request a quote for copper patti, strips or busbars. Call, WhatsApp or visit Balaji Enterprises in Jaipur.",
+};
 
 const icon = {
   phone: <path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2z" />,
@@ -22,7 +25,7 @@ export default function ContactPage() {
     <>
       <PageHero title="Contact Us" text="Tell us your requirement. Our team will help you find the right copper solution." />
 
-      <section className="bg-[#0A0A0A] py-24">
+      <section className="bg-[#0A0A0A] py-16 md:py-24">
         <div className="mx-auto grid max-w-7xl gap-12 px-6 lg:grid-cols-5">
           <div className="space-y-4 lg:col-span-2">
             {cards.map(([ic, h, v, href]) => {
@@ -41,7 +44,11 @@ export default function ContactPage() {
 
             <a href={waLink()} target="_blank" rel="noreferrer"
                className="block rounded-md border border-[#B87333] bg-[#B87333]/10 p-6 text-center text-[#D49A5B] transition hover:bg-[#B87333] hover:text-[#0A0A0A]">
-              Chat on WhatsApp →
+              Chat on WhatsApp
+            </a>
+            <a href={mapsDirections} target="_blank" rel="noreferrer"
+               className="block rounded-md border border-[#2B2B2B] bg-[#141414] p-6 text-center text-[#F5F2ED] transition hover:border-[#B87333]/70">
+              Get directions on Google Maps
             </a>
           </div>
 
@@ -49,7 +56,7 @@ export default function ContactPage() {
         </div>
       </section>
 
-      <section className="bg-[#141414] pb-24 pt-4">
+      <section className="bg-[#141414] py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-6">
           <div className="overflow-hidden rounded-md border border-[#2B2B2B]">
             <iframe title="Our location" src={mapSrc} loading="lazy" referrerPolicy="no-referrer-when-downgrade"
